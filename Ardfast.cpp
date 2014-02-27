@@ -14,6 +14,22 @@ void shiftOutMsb(Pin dataPin, Pin clockPin, unsigned long val, uint8_t bits)
     }
 }
 
+void shiftOutLsb(Pin dataPin, Pin clockPin, unsigned long val, uint8_t bits)
+{
+    uint8_t n;
+    
+    for (n = 0; n < bits; n++)  
+    {
+        if((val & (1ul << n)))
+            pinHigh(dataPin);
+        else
+            pinLow(dataPin);
+
+        pinHigh(clockPin);
+        pinLow(clockPin);		
+    }
+}
+
 // convenience call to create Pin but costly on program space to bring in these other calls
 Pin createPin(uint8_t logicalPin)
 {

@@ -19,8 +19,8 @@ struct Pin {
 
 Pin createPin(uint8_t logicalPin);
 
-
 void shiftOutMsb(Pin dataPin, Pin clockPin, unsigned long val, uint8_t bits);
+void shiftOutLsb(Pin dataPin, Pin clockPin, unsigned long val, uint8_t bits);
 
 #endif
 
