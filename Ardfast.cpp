@@ -5,12 +5,12 @@ void shiftOutMsb(Pin dataPin, Pin clockPin, unsigned long val, uint8_t bits)
     for (bits--; bits < 255; bits--)  
     {
         if((val & (1ul << bits)))
-            pinHigh(dataPin);
+            setPinHigh(dataPin);
         else
-            pinLow(dataPin);
+            setPinLow(dataPin);
 
-        pinHigh(clockPin);
-        pinLow(clockPin);		
+        setPinHigh(clockPin);
+        setPinLow(clockPin);		
     }
 }
 
@@ -21,12 +21,12 @@ void shiftOutLsb(Pin dataPin, Pin clockPin, unsigned long val, uint8_t bits)
     for (n = 0; n < bits; n++)  
     {
         if((val & (1ul << n)))
-            pinHigh(dataPin);
+            setPinHigh(dataPin);
         else
-            pinLow(dataPin);
+            setPinLow(dataPin);
 
-        pinHigh(clockPin);
-        pinLow(clockPin);		
+        setPinHigh(clockPin);
+        setPinLow(clockPin);		
     }
 }
 
@@ -36,7 +36,7 @@ Pin createPin(uint8_t logicalPin)
     Pin pin;
     
     pin.pinMask = digitalPinToBitMask(logicalPin);
-    pin.portAddr = portOutputRegister(
+    pin.outRegister = portOutputRegister(
         digitalPinToPort(logicalPin)
     );
     return pin;
